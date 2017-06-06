@@ -124,4 +124,55 @@ $('.menu-item').on( 'click', function() {
 	
 	$('input, textarea').placeholder();
 
+//Formulario Contacto
+$('#contact').on('click', function (){
+    
+    var name2 = $('[name="name"]').val(),
+        email2 = $('[name="email"]').val(),
+        checkForm = false,
+        mensaje2 = $('[name="message"]').val();
+    
+    if (name2 === '') {
+      checkForm = true;
+    } else  if (email2 === '') {
+      checkForm = true;
+    } else  if (mensaje2 === '') {
+      checkForm = true;
+    } else {
+      checkForm = false;
+    }
+
+    if (checkForm) {
+      $('.requiretop').fadeIn();
+    } else {
+      $('.requiretop').fadeOut();
+      $(this).html('Enviando');
+      var parametrosArt = {
+          "name" : name2,
+          "email" : email2,
+          "mensaje" : mensaje2
+      }
+      
+      $.ajax({
+          data:  parametrosArt,
+          url:   'main.js',
+          type:  'post',
+          dataType: "json",
+          beforeSend: function (data) {
+                  // console.log('is sending');
+          },
+          success:  function () {
+                 // $("#resultado").html(response);
+          },
+          error: function (data) {
+              console.log('was send');
+              $('.thanks').fadeIn();
+              $('[name="name"]').val("");
+              $('[name="mail"]').val("");
+              $('[name="mensaje"]').val("");
+              $('.btnForm').html('Enviar');
+          }
+      });
+    }
+})
       
