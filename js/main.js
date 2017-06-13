@@ -17,7 +17,7 @@ $('.menu-item').on( 'click', function() {
       itemSelector: '.project'
     });
 
-    //Portfolio filters
+    //Filtros del protafolio
     $('#filters').on( 'click', 'li', function() {
       $('#filters li').removeClass('active');
       $(this).addClass('active');
